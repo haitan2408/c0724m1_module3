@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .container {
+            padding-left: 100px;
+            padding-right: 100px;
+            width: 100%;
+        }
+
+        div {
+            float: left;
+            display: inline-block;
+        }
+
+        .col-1 {
+            width: 8.33%;
+        }
+
+        .col-2 {
+            width: 16.67%;
+        }
+
+        .col-3 {
+            width: 25%;
+        }
+
+        /*Desktop first/ Mobile first*/
+        @media screen and (max-width: 1200px) {
+            .col-xl-1 {
+                width: 8.33%;
+            }
+
+            .col-xl-2 {
+                width: 16.67%;
+            }
+
+            .col-xl-3 {
+                width: 25%;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .col-lg-1 {
+                width: 8.33%;
+            }
+
+            .col-lg-2 {
+                width: 16.67%;
+            }
+
+            .col-lg-3 {
+                width: 25%;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            .col-sm-1 {
+                width: 8.33%;
+            }
+
+            .col-sm-2 {
+                width: 16.67%;
+            }
+
+            .col-sm-3 {
+                width: 25%;
+            }
+
+            .col-sm-6 {
+                width: 50%;
+            }
+
+            .col-sm-12 {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .col-xs-1 {
+                width: 8.33%;
+            }
+
+            .col-xs-2 {
+                width: 16.67%;
+            }
+
+            .col-xs-3 {
+                width: 25%;
+            }
+
+            .col-xs-6 {
+                width: 50%;
+            }
+
+            .col-xs-12 {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav>
+
+</nav>
+<div class="container">
+    <div style="background-color: red;height: 50px" class="col-3 col-sm-6 col-lg-2 col-xs-12"><p>
+        rewiorueiowruewiorueiowrueiowruewiorueiowruwiu
+    </p></div>
+    <div style="background-color: blue; height: 50px" class="col-3 col-sm-6 col-lg-2 col-xs-12"></div>
+    <div style="background-color: yellow; height: 50px" class="col-3 col-sm-6 col-lg-2 col-xs-12"></div>
+    <div style="background-color: darkblue; height: 50px" class="col-3 col-sm-6 col-lg-2 col-xs-12"></div>
+</div>
+<footer>
+
+</footer>
+</body>
+</html>
