@@ -22,6 +22,7 @@ public class SumController extends HttpServlet {
         Double num2 = Double.parseDouble(req.getParameter("num2"));
         Double sum = num1 + num2;
         req.setAttribute("sum", sum);
+
         req.getRequestDispatcher("/WEB-INF/view/sum.jsp").forward(req, resp);
     }
 }
