@@ -31,8 +31,19 @@ public class StudentController extends HttpServlet {
 
                 break;
             case "delete":
+                int id = Integer.parseInt(req.getParameter("id"));
+                studentService.remove(id);
+                resp.sendRedirect("/student?message=deleted");
                 break;
             default:
+                String message = req.getParameter("message");
+                if (message != null) {
+                   if (message.equals("deleted")) {
+                       req.setAttribute("message", "Xóa thành công");
+                   } else if(message.equals("created")) {
+                       req.setAttribute("message", "Thêm mới thành công");
+                   }
+                }
                 List<Student> students = studentService.getAll();
                 req.setAttribute("students", students);
                 req.getRequestDispatcher("/WEB-INF/view/student/list.jsp").forward(req, resp);
@@ -54,7 +65,7 @@ public class StudentController extends HttpServlet {
                 String className = req.getParameter("className");
                 Student student = new Student(name, address, point, className);
                 studentService.save(student);
-                resp.sendRedirect("/student");
+                resp.sendRedirect("/student?message=created");
         }
     }
 }
