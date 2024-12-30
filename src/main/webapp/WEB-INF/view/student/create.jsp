@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Thêm mới học sinh</title>
@@ -17,7 +18,7 @@
     <form method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Tên: </label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Địa chỉ: </label>
@@ -29,7 +30,12 @@
         </div>
         <div class="mb-3">
             <label for="className" class="form-label">Tên lớp: </label>
-            <input type="text" class="form-control" id="className" name="className">
+           <select id="className" name="idClass" class="form-control">
+               <option value="">------Chọn lớp-------</option>
+               <c:forEach items="${classrooms}" var="classroom">
+                   <option value="${classroom.id}">${classroom.name}</option>
+               </c:forEach>
+           </select>
         </div>
         <button type="submit" class="btn btn-primary">Thêm mới</button>
     </form>

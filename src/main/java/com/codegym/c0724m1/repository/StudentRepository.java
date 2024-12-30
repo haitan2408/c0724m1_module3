@@ -1,5 +1,6 @@
 package com.codegym.c0724m1.repository;
 
+import com.codegym.c0724m1.dto.StudentDTO;
 import com.codegym.c0724m1.entity.Student;
 
 import java.sql.PreparedStatement;
@@ -10,28 +11,39 @@ import java.util.List;
 
 public class StudentRepository {
 
-    private static List<Student> students = new ArrayList<>();
-
-    static {
-        students.add(new Student(1, "HaTT", "QN", 9, "C0724M1"));
-        students.add(new Student(3, "HaTT1", "QN", 9, "C0724M1"));
-        students.add(new Student(5, "HaTT2", "QN", 9, "C0724M1"));
-        students.add(new Student(6, "HaTT3", "QN", 9, "C0724M1"));
-    }
-
 
     public List<Student> getAll() {
         List<Student> students = new ArrayList<>();
         try {
-            PreparedStatement statement = BaseRepository.getConnection().prepareStatement("select * from students");
+            PreparedStatement statement = BaseRepository.getConnection().prepareStatement("select * from students join classrooms on students.id_class = classrooms.id");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("code");
                 String name = resultSet.getString("name_student");
                 String address = resultSet.getString("address");
                 double point = resultSet.getDouble("point");
-                String className = resultSet.getString("class_name");
-                students.add(new Student(id, name, address, point, className));
+//                Integer className = resultSet.getString("class_name");
+//                students.add(new Student(id, name, address, point, className));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return students;
+    }
+
+    public List<StudentDTO> getAllDTO() {
+        List<StudentDTO> students = new ArrayList<>();
+        try {
+            PreparedStatement statement = BaseRepository.getConnection().prepareStatement("select * from students join classrooms on students.id_class = classrooms.id");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("code");
+                String name = resultSet.getString("name_student");
+                String address = resultSet.getString("address");
+                double point = resultSet.getDouble("point");
+                String className = resultSet.getString("name_class");
+                students.add(new StudentDTO(id, name, address, point, className));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -43,11 +55,11 @@ public class StudentRepository {
     public void save(Student s) {
         try {
             PreparedStatement statement = BaseRepository.getConnection()
-                    .prepareStatement("insert into students(name_student, address, point, class_name) values (?,?,?,?)");
+                    .prepareStatement("insert into students(name_student, address, point, id_class) values (?,?,?,?)");
             statement.setString(1, s.getName());
             statement.setString(2, s.getAddress());
             statement.setDouble(3, s.getPoint());
-            statement.setString(4, s.getClassName());
+            statement.setInt(4, s.getIdClass());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

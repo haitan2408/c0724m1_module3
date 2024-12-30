@@ -1,7 +1,10 @@
 package com.codegym.c0724m1.controller;
 
+import com.codegym.c0724m1.dto.StudentDTO;
 import com.codegym.c0724m1.entity.Student;
+import com.codegym.c0724m1.service.IClassroomService;
 import com.codegym.c0724m1.service.IStudentService;
+import com.codegym.c0724m1.service.impl.ClassroomService;
 import com.codegym.c0724m1.service.impl.StudentService;
 
 import javax.servlet.ServletException;
@@ -15,6 +18,7 @@ import java.util.List;
 @WebServlet(name = "studentController", urlPatterns = "/student")
 public class StudentController extends HttpServlet {
     private IStudentService studentService = new StudentService();
+    private IClassroomService classroomService = new ClassroomService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,6 +29,7 @@ public class StudentController extends HttpServlet {
         }
         switch (action) {
             case "create":
+                req.setAttribute("classrooms", classroomService.getAll());
                 req.getRequestDispatcher("/WEB-INF/view/student/create.jsp").forward(req, resp);
                 break;
             case "update":
@@ -44,7 +49,7 @@ public class StudentController extends HttpServlet {
                        req.setAttribute("message", "Thêm mới thành công");
                    }
                 }
-                List<Student> students = studentService.getAll();
+                List<StudentDTO> students = studentService.getAllDTO();
                 req.setAttribute("students", students);
                 req.getRequestDispatcher("/WEB-INF/view/student/list.jsp").forward(req, resp);
         }
@@ -62,8 +67,8 @@ public class StudentController extends HttpServlet {
                 String name = req.getParameter("name");
                 String address = req.getParameter("address");
                 double point = Double.parseDouble(req.getParameter("point"));
-                String className = req.getParameter("className");
-                Student student = new Student(name, address, point, className);
+                Integer idClass = Integer.valueOf(req.getParameter("idClass"));
+                Student student = new Student(name, address, point, idClass);
                 studentService.save(student);
                 resp.sendRedirect("/student?message=created");
         }

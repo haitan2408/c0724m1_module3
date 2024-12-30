@@ -1,5 +1,6 @@
 package com.codegym.c0724m1.service.impl;
 
+import com.codegym.c0724m1.dto.StudentDTO;
 import com.codegym.c0724m1.entity.Student;
 import com.codegym.c0724m1.repository.StudentRepository;
 import com.codegym.c0724m1.service.IStudentService;
@@ -52,5 +53,10 @@ public class StudentService implements IStudentService {
             }
         }
         return temp;
+    }
+
+    @Override
+    public List<StudentDTO> getAllDTO() {
+        return studentRepository.getAllDTO();
     }
 }

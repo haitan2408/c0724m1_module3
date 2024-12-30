@@ -2,22 +2,22 @@ package com.codegym.c0724m1.entity;
 
 public class Student extends Person implements Comparable<Student>{
     private double point;
-    private String className;
+    private Integer idClass;
 
     public Student() {
     }
 
 
-    public Student(int id, String name, String address, double point, String className) {
+    public Student(int id, String name, String address, double point, Integer className) {
         super(id, name, address);
         this.point = point;
-        this.className = className;
+        this.idClass = className;
     }
 
-    public Student(String name, String address, double point, String className) {
+    public Student(String name, String address, double point, Integer className) {
         super(name, address);
         this.point = point;
-        this.className = className;
+        this.idClass = className;
     }
 
 
@@ -29,19 +29,19 @@ public class Student extends Person implements Comparable<Student>{
         this.point = point;
     }
 
-    public String getClassName() {
-        return className;
+    public Integer getIdClass() {
+        return idClass;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setIdClass(Integer idClass) {
+        this.idClass = idClass;
     }
 
     @Override
     public String toString() {
         return super.toString()+"Student{" +
                 "point=" + point +
-                ", className='" + className + '\'' +
+                ", className='" + idClass + '\'' +
                 '}';
     }
 
